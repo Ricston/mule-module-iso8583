@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+      xmlns:iso8583="http://www.mulesoft.org/schema/mule/iso8583"
+      xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/3.2/mule-vm.xsd
+        http://www.mulesoft.org/schema/mule/iso8583 http://www.mulesoft.org/schema/mule/iso8583/3.2/mule-iso8583.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <spring:bean id="isoMessageFactory" class="com.solab.iso8583.MessageFactory">
+        <spring:property name="configPath" value="j8583.xml"/>
+    </spring:bean>
+
+    <flow name="iso8583Service">
+        <vm:inbound-endpoint path="iso8583.service" exchange-pattern="request-response"/>
+
+        <iso8583:iso8583-to-message-transformer>
+            <spring:property name="messageFactory" ref="isoMessageFactory"/>
+            <spring:property name="isoHeaderLength" value="4"/>
+        </iso8583:iso8583-to-message-transformer>
+
+        <script:transformer>
+            <script:script engine="groovy">
+                payload.put(39, new org.mule.module.iso8583.Field().setType(org.mule.module.iso8583.FieldType.ALPHA).setValue('00').setLength(2))
+                return payload
+            </script:script>
+        </script:transformer>
+
+        <message-properties-transformer scope="outbound">
+            <add-message-property key="iso8583.mti" value="0810"/>
+            <add-message-property key="iso8583.header" value="#[header:inbound:iso8583.header]"/>
+        </message-properties-transformer>
+
+        <iso8583:message-to-iso8583-transformer>
+            <spring:property name="messageFactory" ref="isoMessageFactory"/>
+        </iso8583:message-to-iso8583-transformer>
+    </flow>
+</mule>

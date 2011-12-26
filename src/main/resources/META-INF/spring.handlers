@@ -1,0 +1,1 @@
+http\://www.mulesoft.org/schema/mule/iso8583=org.mule.module.iso8583.config.Iso8583NamespaceHandler
