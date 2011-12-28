@@ -191,7 +191,6 @@
             <version>4.9</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
 	        <groupId>net.sf.j8583</groupId>
 	        <artifactId>j8583</artifactId>
