@@ -193,8 +193,8 @@
         </dependency>
         <dependency>
             <groupId>net.sf.j8583</groupId>
-	        <artifactId>j8583</artifactId>
-	        <version>1.5.4</version>
+            <artifactId>j8583</artifactId>
+            <version>1.5.4</version>
         </dependency>
     </dependencies>
 
