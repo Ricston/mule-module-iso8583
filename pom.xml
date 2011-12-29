@@ -192,7 +192,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-	        <groupId>net.sf.j8583</groupId>
+            <groupId>net.sf.j8583</groupId>
 	        <artifactId>j8583</artifactId>
 	        <version>1.5.4</version>
         </dependency>
