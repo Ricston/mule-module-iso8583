@@ -24,7 +24,7 @@ public class Iso8583TestCase extends FunctionalTestCase {
                                                  0x30, 0x31, 0x32, 0x32, 0x36, 0x31, 0x32, 0x34, 0x34, 0x30, 0x34, 0x30, 0x30,
                                                  0x30, 0x31, 0x30, 0x32, 0x33, 0x30, 0x31 };
 
-    // [Header, MTI = 0810, Bitmap, Field 7 = 1226124404, field 11 = 102, Field 35 = 00, Field 70 = 301]
+    // [Header, MTI = 0810, Bitmap, Field 7 = 1226124404, field 11 = 102, Field 39 = 00, Field 70 = 301]
     private static final byte[] ECHO_REPLY =  { 0x30, 0x30, 0x35, 0x35, 0x30, 0x38, 0x31, 0x30, 0x38, 0x32, 0x32, 0x30, 0x30,
                                                 0x30, 0x30, 0x30, 0x30, 0x32, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x34,
                                                 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
@@ -39,7 +39,7 @@ public class Iso8583TestCase extends FunctionalTestCase {
     public void testIso8583Service() throws Exception {
         MuleClient client = muleContext.getClient();
         MuleMessage result = client.send("vm://iso8583.service", new DefaultMuleMessage(ECHO_REQUEST, muleContext));
-        assertArrayEquals(ECHO_REPLY, (byte[]) result.getPayload());
+        assertArrayEquals(ECHO_REPLY, result.getPayloadAsBytes());
     }
 
 }

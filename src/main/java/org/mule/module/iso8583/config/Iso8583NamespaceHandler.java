@@ -8,8 +8,8 @@
 package org.mule.module.iso8583.config;
 
 import org.mule.config.spring.parsers.specific.MessageProcessorDefinitionParser;
-import org.mule.module.iso8583.Iso8583ToMessage;
-import org.mule.module.iso8583.MessageToIso8583;
+import org.mule.module.iso8583.Iso8583ToMuleMessage;
+import org.mule.module.iso8583.MuleMessageToIso8583;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 /**
@@ -20,7 +20,7 @@ public class Iso8583NamespaceHandler extends NamespaceHandlerSupport
 {
     public void init()
     {
-        registerBeanDefinitionParser("message-to-iso8583-transformer", new MessageProcessorDefinitionParser(MessageToIso8583.class));
-        registerBeanDefinitionParser("iso8583-to-message-transformer", new MessageProcessorDefinitionParser(Iso8583ToMessage.class));
+        registerBeanDefinitionParser("message-to-iso8583-transformer", new MessageProcessorDefinitionParser(MuleMessageToIso8583.class));
+        registerBeanDefinitionParser("iso8583-to-message-transformer", new MessageProcessorDefinitionParser(Iso8583ToMuleMessage.class));
     }
 }

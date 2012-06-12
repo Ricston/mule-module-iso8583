@@ -18,7 +18,7 @@ import org.mule.transformer.AbstractMessageTransformer;
 
 import java.util.HashMap;
 
-public class Iso8583ToMessage extends AbstractMessageTransformer implements Initialisable {
+public class Iso8583ToMuleMessage extends AbstractMessageTransformer implements Initialisable {
 
     private MessageFactory messageFactory;
     private int isoHeaderLength;

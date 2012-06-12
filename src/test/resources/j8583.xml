@@ -1,4 +1,5 @@
 <j8583-config>
+    <header type="0810">0055</header>
     <parse type="0800">
         <field num="7" type="NUMERIC" length="10" />
         <field num="11" type="NUMERIC" length="6"/>

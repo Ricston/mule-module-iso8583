@@ -17,7 +17,7 @@ import org.mule.transformer.AbstractMessageTransformer;
 
 import java.util.Map;
 
-public class MessageToIso8583 extends AbstractMessageTransformer {
+public class MuleMessageToIso8583 extends AbstractMessageTransformer {
 
     private MessageFactory messageFactory;
 
@@ -92,14 +92,8 @@ public class MessageToIso8583 extends AbstractMessageTransformer {
     public Object transformMessage(MuleMessage muleMessage, String outputEncoding) throws TransformerException {
         Map<Integer, Field> payload = (Map<Integer, Field>) muleMessage.getPayload();
         IsoMessage isoMessage;
-        String isoHeader;
 
         isoMessage = messageFactory.newMessage(Integer.parseInt(muleMessage.<String>getOutboundProperty("iso8583.mti"), 16));
-        isoHeader = muleMessage.<String>getOutboundProperty("iso8583.header");
-
-        if (isoHeader != null) {
-            isoMessage.setIsoHeader(isoHeader);
-        }
 
         for (Map.Entry<Integer, Field> entry : payload.entrySet()) {
             if (entry.getValue() != null) {
