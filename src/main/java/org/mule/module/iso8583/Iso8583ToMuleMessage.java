@@ -11,14 +11,13 @@ import com.solab.iso8583.IsoMessage;
 import com.solab.iso8583.IsoValue;
 import com.solab.iso8583.MessageFactory;
 import org.mule.api.MuleMessage;
-import org.mule.api.lifecycle.Initialisable;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import java.util.HashMap;
 
-public class Iso8583ToMuleMessage extends AbstractMessageTransformer implements Initialisable {
+public class Iso8583ToMuleMessage extends AbstractMessageTransformer {
 
     private MessageFactory messageFactory;
     private int isoHeaderLength;
@@ -45,12 +44,6 @@ public class Iso8583ToMuleMessage extends AbstractMessageTransformer implements 
         muleMessage.setProperty("iso8583.header", isoMessage.getIsoHeader(), PropertyScope.INBOUND);
 
         return muleMessage;
-    }
-
-    @Override
-    public void initialise() {
-        if (messageFactory == null)
-            messageFactory = new MessageFactory();
     }
 
     public MessageFactory getMessageFactory() {
