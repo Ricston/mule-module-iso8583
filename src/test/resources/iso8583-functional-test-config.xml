@@ -16,7 +16,7 @@
         <spring:property name="configPath" value="j8583.xml"/>
     </spring:bean>
 
-    <flow name="iso8583Service">
+    <flow name="iso8583Flow">
         <vm:inbound-endpoint path="iso8583.service" exchange-pattern="request-response"/>
 
         <iso8583:iso8583-to-message-transformer>
